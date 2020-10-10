@@ -26,7 +26,10 @@ abstract class BaseRemoteRepository {
             if (response.isSuccessful) {
                 val body = response.body()
                 if (body != null) {
+                    Log.e("lista bodiiiii",body.toString())
+
                     return body
+
                 }
 
             }

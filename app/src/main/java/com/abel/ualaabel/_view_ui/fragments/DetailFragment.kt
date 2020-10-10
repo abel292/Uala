@@ -1,12 +1,13 @@
 package com.abel.ualaabel._view_ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.abel.ualaabel.R
-import com.abel.ualaabel._model.remote.ryck_y_morti.Personaje
+import com.abel.ualaabel._model.remote.meals.Meal
+import com.abel.ualaabel._view_ui.adapters.base.IngredientesAdapter
 import com.abel.ualaabel._view_ui.base.BaseFragment
 import com.abel.ualaabel.utils.CustomsConstantes
 import com.bumptech.glide.Glide
@@ -14,7 +15,9 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : BaseFragment() {
 
-    lateinit var personaje: Personaje
+    lateinit var meal: Meal
+    lateinit var ingredientesAdapter: IngredientesAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -31,13 +34,27 @@ class DetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initArgument()
+        initObservables()
+        init()
+        initListeners()
+    }
+
+    override fun initObservables() {
+
+    }
+
+    override fun init() {
+    }
+
+    override fun initListeners() {
+
     }
 
     private fun initArgument() {
 
         val argumentProducto = arguments
-        personaje =
-            argumentProducto?.getSerializable(CustomsConstantes.EXTRAS_VIEW_PRODUCT) as Personaje
+        meal =
+            argumentProducto?.getSerializable(CustomsConstantes.EXTRAS_VIEW_PRODUCT) as Meal
         try {
             cargarDatosAVista()
         } catch (e: Exception) {
@@ -46,21 +63,29 @@ class DetailFragment : BaseFragment() {
     }
 
     private fun cargarDatosAVista() {
-        textViewNombre.text = personaje.name
-        textViewCodigo.text = personaje.created
-        textViewCantidad.text = personaje.gender.toString()
-        textViewReserva.text = personaje.species
-        textViewCompra.text = personaje.url
-        textViewVenta.text = personaje.status
-        textViewGanancia.text = personaje.type
-
+        textViewNombre.text = meal.strMeal
+        textViewInstrucciones.text = meal.strInstructions
 
         Glide.with(requireContext())
-            .load(personaje.image)
+            .load(meal.strMealThumb)
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
             .centerCrop()
             .into(imageViewImageProducto)
+
+        val listIngredientes = meal.generateListIngredientes()
+        notifyRecyclerViewItems(listIngredientes)
+
+        videoView.setVideoPath(meal.strYoutube);
+    }
+
+    private fun notifyRecyclerViewItems(list: List<String>) {
+
+        val layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerViewIngredientes.layoutManager = layoutManager
+        ingredientesAdapter = IngredientesAdapter(requireContext(), list, recyclerViewIngredientes)
+        recyclerViewIngredientes.adapter = ingredientesAdapter
     }
 
 }

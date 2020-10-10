@@ -21,9 +21,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="TextView"
+        android:text="Name meal"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewPersonaje"
         app:layout_constraintStart_toEndOf="@+id/imageViewPersonaje"
         app:layout_constraintTop_toTopOf="@+id/imageViewPersonaje" />
+
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/textViewNamePersonaje"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNamePersonaje" />
 </androidx.constraintlayout.widget.ConstraintLayout>
