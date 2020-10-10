@@ -14,7 +14,7 @@ import com.abel.ualaabel.R
 import com.abel.ualaabel._model.remote.meals.Meal
 import com.abel.ualaabel._view_model.ApiViewModel
 import com.abel.ualaabel._view_ui.adapters.base.OnListenerItemRecyclerView
-import com.abel.ualaabel._view_ui.adapters.base.PersonajeAdapter
+import com.abel.ualaabel._view_ui.adapters.base.MealsAdapter
 import com.abel.ualaabel._view_ui.base.BaseFragment
 import com.abel.ualaabel.utils.extensiones.postDelayed
 import com.bumptech.glide.Glide
@@ -25,7 +25,7 @@ class ListFragment : BaseFragment(), OnListenerItemRecyclerView<Meal> {
     val viewModel by lazy {
         ViewModelProviders.of(this).get(ApiViewModel::class.java)
     }
-    lateinit var mealAdapter: PersonajeAdapter
+    lateinit var mealAdapter: MealsAdapter
     var meals: List<Meal>? = null
 
     override fun onCreateView(
@@ -95,7 +95,7 @@ class ListFragment : BaseFragment(), OnListenerItemRecyclerView<Meal> {
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         recyclerView.layoutManager = layoutManager
-        mealAdapter = PersonajeAdapter(requireContext(), list, recyclerView)
+        mealAdapter = MealsAdapter(requireContext(), list, recyclerView)
         mealAdapter.listener = this
         recyclerView.adapter = mealAdapter
     }

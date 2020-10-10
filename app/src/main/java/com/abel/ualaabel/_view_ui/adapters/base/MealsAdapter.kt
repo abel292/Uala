@@ -14,7 +14,7 @@ import com.abel.ualaabel._model.remote.meals.Meal
 import com.bumptech.glide.Glide
 
 
-class PersonajeAdapter(var context: Context, lista: List<Meal>, var recyclerView: RecyclerView) :
+class MealsAdapter(var context: Context, lista: List<Meal>, var recyclerView: RecyclerView) :
     BaseAdapterRecycler<Meal>() {
 
     lateinit var listener: OnListenerItemRecyclerView<Meal>
