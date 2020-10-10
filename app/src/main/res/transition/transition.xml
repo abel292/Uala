@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionManager xmlns:android="http://schemas.android.com/apk/res/android">
+    <string name="posterImage">poster %s</string>
+    <string name="releaseDate">date %s</string>
+    <string name="rating">rating %s</string>
+</transitionManager>
