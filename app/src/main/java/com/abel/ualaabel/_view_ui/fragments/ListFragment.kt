@@ -16,7 +16,7 @@ import com.abel.ualaabel._view_model.ApiViewModel
 import com.abel.ualaabel._view_ui.adapters.base.OnListenerItemRecyclerView
 import com.abel.ualaabel._view_ui.adapters.base.MealsAdapter
 import com.abel.ualaabel._view_ui.base.BaseFragment
-import com.abel.ualaabel.utils.extensiones.postDelayed
+import com.abel.ualaabel.utils.extensiones.postDelayedWithTime
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_list.*
 
@@ -45,6 +45,11 @@ class ListFragment : BaseFragment(), OnListenerItemRecyclerView<Meal> {
 
     }
 
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        viewModel.getPlanes("a")
+    }
+
     override fun initObservables() {
         viewModel.list.observe(viewLifecycleOwner, {
             try {
@@ -56,7 +61,7 @@ class ListFragment : BaseFragment(), OnListenerItemRecyclerView<Meal> {
 
         viewModel.mealRandom.observe(viewLifecycleOwner, Observer {
             Log.e("LISTA:", "error $it")
-            showBanner(it.strMealThumb)
+            showBanner(it.strMealThumb, it.strMeal)
 
         })
 
@@ -86,6 +91,8 @@ class ListFragment : BaseFragment(), OnListenerItemRecyclerView<Meal> {
                     viewModel.getPlanes(editable.toString())
             }
         })
+
+
     }
 
 
@@ -105,15 +112,16 @@ class ListFragment : BaseFragment(), OnListenerItemRecyclerView<Meal> {
         fragmentView?.goToWithObjet(R.id.action_listFragment_to_detailFragment, objects)
     }
 
-    private fun showBanner(url: String) {
+    private fun showBanner(url: String, name: String) {
 
+        nameProductBanner.text = name
         Glide.with(requireContext())
             .load(url)
             .placeholder(R.drawable.ic_launcher_background)
             .error(R.drawable.ic_launcher_background)
             .into(imageViewBanner)
 
-        postDelayed(10000) {
+        postDelayedWithTime(10000) {
             viewModel.getMealRandom()
         }
     }

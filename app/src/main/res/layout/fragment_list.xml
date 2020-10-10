@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp">
+        >
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -27,9 +27,12 @@
         <EditText
             android:id="@+id/editTextTextSearchMeal"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:ems="10"
+            android:textAlignment="center"
             android:hint="Search meal..."
+            style="@style/styleTextViewFondoOscuroTitle"
+            android:background="@color/purple_500"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,5 +47,26 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:src="@tools:sample/backgrounds/scenic" />
+
+        <LinearLayout
+            android:id="@+id/contentNameBanner"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:background="@drawable/gradient_banner"
+            android:elevation="100dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/nameProductBanner"
+                style="@style/styleTextViewFondoOscuroTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="name" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
